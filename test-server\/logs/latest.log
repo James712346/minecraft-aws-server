@@ -1,0 +1,31 @@
+[08:18:20] [ServerMain/INFO]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, name=PROD]
+[08:18:21] [ServerMain/INFO]: Loaded 1373 recipes
+[08:18:22] [ServerMain/INFO]: Loaded 1484 advancements
+[08:18:22] [Server thread/INFO]: Starting minecraft server version 1.21.5
+[08:18:22] [Server thread/INFO]: Loading properties
+[08:18:22] [Server thread/INFO]: Default game type: SURVIVAL
+[08:18:22] [Server thread/INFO]: Generating keypair
+[08:18:22] [Server thread/INFO]: Starting Minecraft server on *:25564
+[08:18:22] [Server thread/INFO]: Using epoll channel type
+[08:18:22] [Server thread/INFO]: Preparing level "world"
+[08:18:22] [Server thread/INFO]: Preparing start region for dimension minecraft:overworld
+[08:18:23] [Worker-Main-4/INFO]: Preparing spawn area: 0%
+[08:18:23] [Worker-Main-4/INFO]: Preparing spawn area: 0%
+[08:18:23] [Server thread/INFO]: Time elapsed: 793 ms
+[08:18:23] [Server thread/INFO]: Done (0.969s)! For help, type "help"
+[08:18:26] [User Authenticator #1/INFO]: UUID of player Jem5 is b99eee13-ea42-4645-891a-19f498044d99
+[08:18:26] [Server thread/INFO]: Jem5[/192.168.1.131:41674] logged in with entity id 98 at (50.5, 69.0, 7.5)
+[08:18:26] [Server thread/INFO]: Jem5 joined the game
+[08:18:31] [Server thread/INFO]: Jem5 lost connection: Disconnected
+[08:18:31] [Server thread/INFO]: Jem5 left the game
+[08:18:36] [Server thread/INFO]: Stopping the server
+[08:18:36] [Server thread/INFO]: Stopping server
+[08:18:36] [Server thread/INFO]: Saving players
+[08:18:36] [Server thread/INFO]: Saving worlds
+[08:18:36] [Server thread/INFO]: Saving chunks for level 'ServerLevel[world]'/minecraft:overworld
+[08:18:37] [Server thread/INFO]: Saving chunks for level 'ServerLevel[world]'/minecraft:the_end
+[08:18:37] [Server thread/INFO]: Saving chunks for level 'ServerLevel[world]'/minecraft:the_nether
+[08:18:37] [Server thread/INFO]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[08:18:37] [Server thread/INFO]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[08:18:37] [Server thread/INFO]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[08:18:37] [Server thread/INFO]: ThreadedAnvilChunkStorage: All dimensions are saved
