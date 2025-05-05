@@ -5,7 +5,8 @@ import uuid
 import random
 import time
 import boto3
-
+import threading
+m
 HOST = '0.0.0.0'
 PORT = 25565
 TARGET_PORT = 25565
@@ -173,44 +174,44 @@ def keep_alive(sock):
 # --- Main Handler --- #
 
 def handle_client(sock):
-    try:
-        packet_length = read_varint(sock)
-        packet_id = read_varint(sock)
-        if packet_id == 0x00:  # Handshake
-            print("[>] Starting Handshake")
-            protocol_version = read_varint(sock)
-            server_address_length = read_varint(sock)
-            server_address = sock.recv(server_address_length)
-            port = struct.unpack(">H", sock.recv(2))[0]
-            next_state = read_varint(sock)
+    with sock:
+        try:
+            packet_length = read_varint(sock)
+            packet_id = read_varint(sock)
+            if packet_id == 0x00:  # Handshake
+                print("[>] Starting Handshake")
+                protocol_version = read_varint(sock)
+                server_address_length = read_varint(sock)
+                server_address = sock.recv(server_address_length)
+                port = struct.unpack(">H", sock.recv(2))[0]
+                next_state = read_varint(sock)
 
-            if next_state == 1:  # Status
-                print("[>] Status")
-                read_varint(sock)  # Status Request
-                send_status_response(sock)
-                read_varint(sock)  # Ping
-                ping_payload = sock.recv(8)
-                send_packet(sock, 0x01, ping_payload)
-            elif next_state == 2:  # Login
-                print("[>] Logging in")
-                read_varint(sock)  # Length
-                login_packet_id = read_varint(sock)
-                name_length = read_varint(sock)
-                username = sock.recv(name_length).decode('utf-8')
-                print("Connecting user: ",username)
-                flush_socket(sock)
-                send_login_success(sock, username)
-                read_varint(sock)
-                read_varint(sock)
-                while ping_server() is None:
-                    keep_alive(sock)
+                if next_state == 1:  # Status
+                    print("[>] Status")
+                    read_varint(sock)  # Status Request
+                    send_status_response(sock)
+                    read_varint(sock)  # Ping
+                    ping_payload = sock.recv(8)
+                    send_packet(sock, 0x01, ping_payload)
+                elif next_state == 2:  # Login
+                    print("[>] Logging in")
+                    read_varint(sock)  # Length
+                    login_packet_id = read_varint(sock)
+                    name_length = read_varint(sock)
+                    username = sock.recv(name_length).decode('utf-8')
+                    print("Connecting user: ",username)
+                    flush_socket(sock)
+                    send_login_success(sock, username)
+                    read_varint(sock)
+                    read_varint(sock)
+                    while ping_server() is None:
+                        keep_alive(sock)
+                        time.sleep(1)
                     time.sleep(1)
-                time.sleep(1)
-                send_transfer(sock)
-        sock.close()
-    except Exception as e:
-        print(f"Error: {e}")
-        sock.close()
+                    send_transfer(sock)
+                    print("Cleaning up user: ", username)
+        except Exception as e:
+            print(f"Error: {e}")
 
 
 # --- Start server --- #
@@ -223,7 +224,8 @@ def main():
         while True:
             conn, addr = s.accept()
             print(f"[>] Connection from {addr}")
-            handle_client(conn)
+            thread = threading.Thread(target=handle_client, args=(conn,))
+            thread.start()
 
 if __name__ == "__main__":
     main()
