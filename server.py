@@ -210,6 +210,7 @@ def handle_client(sock):
                     time.sleep(1)
                     send_transfer(sock)
                     print("Cleaning up user: ", username)
+                    time.sleep(5)
         except Exception as e:
             print(f"Error: {e}")
 
